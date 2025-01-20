@@ -3,7 +3,7 @@ import {getPutObjectURL, getObjectURL, listObjects, deleteObject} from '../servi
 
 const router=express.Router();
 
-router.get('/fetchPutObjectURL',async (req,res)=>{
+router.get('/upload',async (req,res)=>{
     console.log("Makise Kurisu");
     const {filename, contentType}=req.query;
     try {
@@ -16,7 +16,7 @@ router.get('/fetchPutObjectURL',async (req,res)=>{
 });
 
 
-router.get('/listImages',async(req,res)=>{
+router.get('/images',async(req,res)=>{
     try {
         const objectList = await listObjects(process.env.S3_BUCKET_NAME, 'uploads/user-uploads/');
         const keys = objectList.Contents ? objectList.Contents.map(item => item.Key) : [];
@@ -28,7 +28,7 @@ router.get('/listImages',async(req,res)=>{
     }
 });
 
-router.delete('/deleteImage',async(req,res)=>{
+router.delete('/delete',async(req,res)=>{
     const {imageURL}=req.query;
     const urlObject = new URL(imageURL);
     const pathname = urlObject.pathname;
